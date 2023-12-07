@@ -3,8 +3,6 @@ function Generate(randomGenerator,jsonString, successCallback, errorCallback){
         var jsonData = JSON.parse(jsonString);
         var keys = Object.keys(jsonData);
 
-        console.log(jsonData);
-    
         var item = {};
         var mainJsonData=jsonData
         GenerateRecursively(randomGenerator,null,item,mainJsonData,jsonData);
@@ -79,7 +77,6 @@ function GenerateRecursively(randomGenerator, jsonName, jsonObject, mainJsonData
                     arr.push(arrItem);
                 }
                 jsonObject[jsonName]=arr;
-                console.log(arr);
                 return jsonObject[jsonName];
                 /*var minItems = jsonData["minItems"] ?? 0;
                 minItems.clamp(0, maxRandomNumberValue);
