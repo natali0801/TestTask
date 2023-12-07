@@ -42,7 +42,6 @@ function InitDomItems()
 }
 
 function OnUnitTestsBtnClick(){
-    var jsonOut = document.getElementById('jsonOut');
     const pseudoRandomGenerator = new PseudoRandomGenerator(pseudoRandomValuesForUnitTests);
     var resultStr="";
     for(var i=0;i<unitTests.length;i++){
@@ -60,7 +59,7 @@ function OnUnitTestsBtnClick(){
         Generate(pseudoRandomGenerator,test.Input,CheckResultSuccess,CheckResultError);
         resultStr+="\n";
     }
-    jsonOut.textContent = resultStr;
+    jsonOut.value = resultStr;
 }
 
 function OnGenerateBtnClick() {
