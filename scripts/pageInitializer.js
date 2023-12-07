@@ -42,28 +42,31 @@ function InitDomItems()
 }
 
 function OnUnitTestsBtnClick(){
+    var jsonOut = document.getElementById('jsonOut');
     const pseudoRandomGenerator = new PseudoRandomGenerator(pseudoRandomValuesForUnitTests);
+    var resultStr="";
     for(var i=0;i<unitTests.length;i++){
         pseudoRandomGenerator.reset();
         var test=unitTests[i];
-        function CheckResultSuccess(result){
-            result = JSON.stringify(result);
-            console.log(result==test.Result?"Success":"Fail");
+        resultStr += "\"Test "+i+"\": ";
+        function CheckResultSuccess(resultData){
+            resultData = JSON.stringify(resultData);
+            resultStr += resultData == test.Result?"Success":"Fail";
         }
 
-        function CheckResultError(result){
-            console.log(result==test.Result?"Success":"Fail");
+        function CheckResultError(resultData){
+            resultStr += resultData == test.Result?"Success":"Fail";;
         }
         Generate(pseudoRandomGenerator,test.Input,CheckResultSuccess,CheckResultError);
+        resultStr+="\n";
     }
+    jsonOut.textContent = resultStr;
 }
 
 function OnGenerateBtnClick() {
     const pseudoRandomGenerator = new PseudoRandomGenerator(pseudoRandomValuesForUnitTests);
     var jsonIn = document.getElementById("jsonIn");
-    //var item = JSON.parse(jsonIn.value);// not valid json
-    //Generate(Math,jsonIn.value,OnGenerateSuccess,OnGenerateErrors);
-    Generate(pseudoRandomGenerator,jsonIn.value,OnGenerateSuccess,OnGenerateErrors);
+    Generate(Math,jsonIn.value,OnGenerateSuccess,OnGenerateErrors);
 }
 
 function OnGenerateSuccess(result){
