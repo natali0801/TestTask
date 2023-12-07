@@ -14,7 +14,6 @@ function Generate(randomGenerator,jsonString, successCallback, errorCallback){
 }
 
 function GenerateRecursively(randomGenerator, jsonName, jsonObject, mainJsonData, jsonData, inclusionArr){
-    //console.log("GenerateRecursively="+jsonName)
     if(!jsonData) return;
     
     if(jsonData["anyOf"])
@@ -58,10 +57,10 @@ function GenerateRecursively(randomGenerator, jsonName, jsonObject, mainJsonData
                 jsonObject[jsonName] = GenerateRandomNumber(randomGenerator,min, max);
                 return jsonObject[jsonName];
             case "string":
-                // create own library for generation string from regexp will take a lot of time
+                // create own library for string generation from regexp will take a lot of time
                 // one of test task restrictions was "don't use external libraries"
                 // Sorry, but I'm not sure that I can spend a lot of time for this point
-                // It looks like monkey work - write pretty hard method or even lirary,instead of using already working external library)
+                // It looks like monkey work - write pretty hard method or even lirary, instead of using already working external library
                 jsonObject[jsonName] = GetRandomItem(randomGenerator,randomNames);
                 return jsonObject[jsonName];
             case "boolean":
@@ -78,13 +77,6 @@ function GenerateRecursively(randomGenerator, jsonName, jsonObject, mainJsonData
                 }
                 jsonObject[jsonName]=arr;
                 return jsonObject[jsonName];
-                /*var minItems = jsonData["minItems"] ?? 0;
-                minItems.clamp(0, maxRandomNumberValue);
-                var itemsCount = Math.max(minItems, randomGenerator.random() * maxRandomNumberValue);
-
-                var isUniq = jsonData["uniqueItems"] ?? false;
-
-                jsonObject[jsonName] = GenerateRandomArr(randomGenerator,randomNames, isUniq, itemsCount);*/
             default:
                 break
         }
